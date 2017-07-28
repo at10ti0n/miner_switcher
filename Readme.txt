@@ -13,7 +13,7 @@ How to correct setup the config file
 //EXP: True
 //SOIL: False
 
-If set yto True script will check this currency for profit info
+If set to True script will check this currency for profit info
 
 [CheckOptions]
 //Times: 2
@@ -32,7 +32,7 @@ ProfitProcent - difference between currency which is mining and new one
 
 [Path]
 //ClaymoreDir: - path to Claymore (ETHHASH) example: F:\Claymore\
-//ZecMinerDir: - path to ZECminer (Nvidia -Equihash, but must work with AMD miner too just put pat to your AMD ZECminer) example: F:\Claymore\
+//ZecMinerDir: - path to ZECminer (Nvidia -Equihash, won't stop ZEC AMD miner - maybe in future will add support if someone will need) example: F:\Claymore\
 //ETHbatname: - name of bat ETH example: ETH-ethermine.bat
 //ZCLbatname:  - name to bat ZCL example: ZCLstart.bat
 //ETCbatname:  - name to bat ETC
