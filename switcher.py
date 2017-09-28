@@ -10,9 +10,10 @@ import sys
 
 def config_read ():
     config = configparser.ConfigParser()
+    config.sections()
     config.read('config.ini')
     print(str(datetime.now()) + ' - Config have been read successfully')
-    return config.sections
+    return config
 
 
 def start_miner(info, config):
@@ -83,8 +84,9 @@ def request_coins(config):
     coins = None
     while coins is None:
         print(str(datetime.now()) + " - Requesting coins info for WhattoMine.com!")
+        url = str(config['UrlPath']['url']) + str(config['UrlPath']['userrates'])
         try:
-            coins = (requests.get(url=str(config['UrlPath']['url']) + str(config['UrlPath']['userrates']), timeout=3))
+            coins = (requests.get(url=url, timeout=3))
         except:
             print(str(datetime.now()) + " - Site didn't respond. Reconnecting in 10 sec!")
             time.sleep(10)
