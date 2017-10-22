@@ -19,6 +19,7 @@ def config_read ():
 def start_miner(info, config):
     zecminer_dir = str(config['Path']['zecminerdir'])
     claymore_dir = str(config['Path']['claymoredir'])
+    ccminer_dir = str(config['Path']['ccminerdir'])
     if zecminer_dir != '' and info['algorithm'] == 'Equihash':
         if info['currency'] == 'ZEC' and str(config['Path']['zecbatname']) != '':
             subprocess.Popen(zecminer_dir + config['Path']['zecbatname'], cwd=zecminer_dir)
@@ -50,8 +51,18 @@ def start_miner(info, config):
             print(config['Path']['expbatname'])
             subprocess.Popen(claymore_dir + config['Path']['expbatname'], cwd=claymore_dir)
         elif info['currency'] == 'SOIL' and str(config['Path']['soilbatname']) != '':
-            print(config['Path']['hushbatname'])
+            print(config['Path']['soilbatname'])
             subprocess.Popen(claymore_dir + config['Path']['soilbatname'], cwd=claymore_dir)
+        else:
+            print('Miner bat not found. Closing Switcher in 10 sec')
+            time.sleep(10)
+            sys.exit()
+    elif ccminer_dir != '' and info['algorithm'] == 'Lyra2REv2':
+        if info['currency'] == 'VTC' and str(config['Path']['vtcbatname']) != '':
+            subprocess.Popen(ccminer_dir + config['Path']['vtcbatname'], cwd=ccminer_dir)
+        elif info['currency'] == 'MONA' and str(config['Path']['monabatname']) != '':
+            print(config['Path']['monabatname'])
+            subprocess.Popen(ccminer_dir + config['Path']['monabatname'], cwd=ccminer_dir)
         else:
             print('Miner bat not found. Closing Switcher in 10 sec')
             time.sleep(10)
