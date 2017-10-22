@@ -10,59 +10,48 @@ import sys
 
 def config_read ():
     config = configparser.ConfigParser()
+    config.sections()
     config.read('config.ini')
     print(str(datetime.now()) + ' - Config have been read successfully')
-    return config.sections
+    return config
 
 
 def start_miner(info, config):
     zecminer_dir = str(config['Path']['zecminerdir'])
     claymore_dir = str(config['Path']['claymoredir'])
-
     if zecminer_dir != '' and info['algorithm'] == 'Equihash':
         if info['currency'] == 'ZEC' and str(config['Path']['zecbatname']) != '':
-            subprocess.Popen(zecminer_dir + config['Path']['zecbatname'], cwd=zecminer_dir,
-                         creationflags=subprocess.CREATE_NEW_CONSOLE)
+            subprocess.Popen(zecminer_dir + config['Path']['zecbatname'], cwd=zecminer_dir)
         elif info['currency'] == 'ZCL' and str(config['Path']['zclbatname']) != '':
-            subprocess.Popen(zecminer_dir + config['Path']['zclbatname'], cwd=zecminer_dir,
-                         creationflags=subprocess.CREATE_NEW_CONSOLE)
+            subprocess.Popen(zecminer_dir + config['Path']['zclbatname'], cwd=zecminer_dir)
         elif info['currency'] == 'ZEN' and str(config['Path']['zenbatname']) != '':
-            subprocess.Popen(zecminer_dir + config['Path']['zenbatname'], cwd=zecminer_dir,
-                         creationflags=subprocess.CREATE_NEW_CONSOLE)
+            subprocess.Popen(zecminer_dir + config['Path']['zenbatname'], cwd=zecminer_dir)
         elif info['currency'] == 'HUSH' and str(config['Path']['hushbatname']) != '':
             print(config['Path']['hushbatname'])
-            subprocess.Popen(zecminer_dir + config['Path']['hushbatname'], cwd=zecminer_dir,
-                         creationflags=subprocess.CREATE_NEW_CONSOLE)
+            subprocess.Popen(zecminer_dir + config['Path']['hushbatname'], cwd=zecminer_dir)
         else:
             print('Miner bat not found. Closing Switcher in 10 sec')
             time.sleep(10)
             sys.exit()
     elif claymore_dir != '' and info['algorithm'] == 'Ethash':
         if info['currency'] == 'ETH' and str(config['Path']['ethbatname']) != '':
-            subprocess.Popen(claymore_dir + config['Path']['ethbatname'], cwd=claymore_dir,
-                         creationflags=subprocess.CREATE_NEW_CONSOLE)
+            subprocess.Popen(claymore_dir + config['Path']['ethbatname'], cwd=claymore_dir)
         elif info['currency'] == 'ETC' and str(config['Path']['etcbatname']) != '':
-            subprocess.Popen(claymore_dir + config['Path']['etcbatname'], cwd=claymore_dir,
-                         creationflags=subprocess.CREATE_NEW_CONSOLE)
+            subprocess.Popen(claymore_dir + config['Path']['etcbatname'], cwd=claymore_dir)
         elif info['currency'] == 'MUSIC' and str(config['Path']['musicbatname']) != '':
-            subprocess.Popen(claymore_dir + config['Path']['musicbatname'], cwd=claymore_dir,
-                         creationflags=subprocess.CREATE_NEW_CONSOLE)
+            subprocess.Popen(claymore_dir + config['Path']['musicbatname'], cwd=claymore_dir)
         elif info['currency'] == 'UBQ' and str(config['Path']['ubqbatname']) != '':
             print(config['Path']['hushbatname'])
-            subprocess.Popen(claymore_dir + config['Path']['ubqbatname'], cwd=claymore_dir,
-                         creationflags=subprocess.CREATE_NEW_CONSOLE)
+            subprocess.Popen(claymore_dir + config['Path']['ubqbatname'], cwd=claymore_dir)
         elif info['currency'] == 'KMD' and str(config['Path']['kmdbatname']) != '':
             print(config['Path']['hushbatname'])
-            subprocess.Popen(claymore_dir + config['Path']['kmdbatname'], cwd=claymore_dir,
-                         creationflags=subprocess.CREATE_NEW_CONSOLE)
+            subprocess.Popen(claymore_dir + config['Path']['kmdbatname'], cwd=claymore_dir)
         elif info['currency'] == 'EXP' and str(config['Path']['expbatname']) != '':
             print(config['Path']['expbatname'])
-            subprocess.Popen(claymore_dir + config['Path']['expbatname'], cwd=claymore_dir,
-                         creationflags=subprocess.CREATE_NEW_CONSOLE)
+            subprocess.Popen(claymore_dir + config['Path']['expbatname'], cwd=claymore_dir)
         elif info['currency'] == 'SOIL' and str(config['Path']['soilbatname']) != '':
             print(config['Path']['hushbatname'])
-            subprocess.Popen(claymore_dir + config['Path']['soilbatname'], cwd=claymore_dir,
-                         creationflags=subprocess.CREATE_NEW_CONSOLE)
+            subprocess.Popen(claymore_dir + config['Path']['soilbatname'], cwd=claymore_dir)
         else:
             print('Miner bat not found. Closing Switcher in 10 sec')
             time.sleep(10)
@@ -75,8 +64,8 @@ def start_miner(info, config):
 
 
 def stop_miner():
-    os.system("taskkill /f /t /im  miner.exe")
-    os.system("taskkill /f /t /im  EthDcrMiner64.exe")
+    os.system('pkill miner')
+    os.system('pkill EthDcrMiner64')
 
 
 def request_coins(config):
